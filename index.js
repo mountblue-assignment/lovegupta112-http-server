@@ -1,34 +1,33 @@
 const fs = require('fs').promises;
 const http = require('http');
+const uuid = require('uuid');
 
 const port = 8000;
 const host = 'localhost';
 
 let indexFile;
 let jsonData;
-const uuid = {
-  uuid: '14d96bb1-5d53-472f-a96e-b3a1fa82addd',
-};
 
 const requestListener = function (req, res) {
   const url = req.url;
 
   //for GET /html -------
-  if (url === '/html') {
+  if (req.method === 'GET' && url === '/html') {
     res.setHeader('Content-Type', 'text/html');
     res.writeHead(200);
     res.end(indexFile);
-  } else if (url === '/json') {
+  } else if (req.method === 'GET' && url === '/json') {
     //for GET /json -------
     res.setHeader('Content-Type', 'application/json');
     res.writeHead(200);
     res.end(jsonData);
-  } else if (url === '/uuid') {
+  } else if (req.method === 'GET' && url === '/uuid') {
     //for GET /uuid -------
+    const generateUuid = { uuid: uuid.v4() };
     res.setHeader('Content-Type', 'application/json');
     res.writeHead(200);
-    res.end(JSON.stringify(uuid));
-  } else if (url.split('/').length === 3) {
+    res.end(JSON.stringify(generateUuid));
+  } else if (req.method === 'GET' && url.split('/').length === 3) {
     const urlPartsArr = req.url.split('/');
     const num = parseInt(urlPartsArr[2]);
 
