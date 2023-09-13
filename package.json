@@ -5,15 +5,18 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "configure-husky": "npx husky install && npx husky add .husky/pre-commit \"npx --no-install lint-staged\""
+    "configure-husky": "npx husky install && npx husky add .husky/pre-commit \"npx --no-install lint-staged\"",
+    "start": "nodemon server.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "eslint": "^8.49.0",
+    "express": "^4.18.2",
     "husky": "^8.0.3",
     "lint-staged": "^14.0.1",
+    "nodemon": "^3.0.1",
     "prettier": "^3.0.3"
   },
   "lint-staged": {
